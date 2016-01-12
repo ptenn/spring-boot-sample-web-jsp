@@ -1,0 +1,52 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+apply plugin: 'war'
+
+war {
+    baseName = 'spring-boot-web'
+    version =  '0.1'
+}
+
+repositories {
+    mavenCentral()
+    maven { url "http://repo.spring.io/release" }
+}
+
+// Maven-style provided configuration
+configurations {
+    provided
+}
+sourceSets.main.compileClasspath += [configurations.provided]
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web:$springBootVersion")
+    compile("org.springframework.boot:spring-boot-starter-tomcat:$springBootVersion")
+    compile("org.apache.tomcat.embed:tomcat-embed-jasper")
+    compile("javax.servlet:jstl")
+
+    // Test Dependencies
+    testCompile "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
+}
+
+idea {
+    module {
+        scopes.PROVIDED.plus += [configurations.provided]
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.10'
+}
