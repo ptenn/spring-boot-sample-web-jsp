@@ -92,4 +92,9 @@ gradle-app.setting
 # Cache of project
 .gradletasknamecache
 
+# ---------------------------------------------------------------------------------------------------------------------
+# Project-specific
+
+log/
+
 

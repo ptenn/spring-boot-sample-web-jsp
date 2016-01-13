@@ -13,8 +13,8 @@ apply plugin: 'spring-boot'
 apply plugin: 'war'
 
 war {
-    baseName = 'spring-boot-web'
-    version =  '0.1'
+    baseName = 'spring-boot-sample-web-jsp'
+    version =  '0.0.1-SNAPSHOT'
 }
 
 repositories {
@@ -26,16 +26,19 @@ repositories {
 configurations {
     provided
 }
-sourceSets.main.compileClasspath += [configurations.provided]
+sourceSets.main.compileClasspath.plus(configurations.provided)
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter-web:$springBootVersion")
+    compile("org.springframework.boot:spring-boot-starter-web:$springBootVersion") {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+    }
+    compile("org.springframework.boot:spring-boot-starter-log4j2:$springBootVersion")
     compile("org.springframework.boot:spring-boot-starter-tomcat:$springBootVersion")
-    compile("org.apache.tomcat.embed:tomcat-embed-jasper")
-    compile("javax.servlet:jstl")
+    compile("org.apache.tomcat.embed:tomcat-embed-jasper:$tomcatEmbedJasperVersion")
+    compile("javax.servlet:jstl:$jstlVersion")
 
     // Test Dependencies
     testCompile "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
