@@ -12,7 +12,7 @@
 	<br>
 	JSTL URL: ${url}
 	<br>
-	Message: ${message}
+	Here is my test Message: ${message}
 </body>
 
 </html>
