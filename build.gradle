@@ -37,6 +37,10 @@ dependencies {
     }
     compile("org.springframework.boot:spring-boot-starter-log4j2:$springBootVersion")
     compile("org.springframework.boot:spring-boot-starter-tomcat:$springBootVersion")
+
+    // Spring Boot DevTools should be removed in a real production app.
+    compile("org.springframework.boot:spring-boot-devtools:$springBootVersion")
+
     compile("org.apache.tomcat.embed:tomcat-embed-jasper:$tomcatEmbedJasperVersion")
     compile("javax.servlet:jstl:$jstlVersion")
 
@@ -52,4 +56,8 @@ idea {
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.10'
+}
+
+bootRun {
+    addResources = true
 }
